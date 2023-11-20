@@ -18,5 +18,6 @@ RUN dotnet publish "BlazorContainerizedApp.csproj" -c Release -o /app/publish /p
 
 FROM base AS final
 WORKDIR /app
+ENV ASPNETCORE_URLS=http://+:8080
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "BlazorContainerizedApp.dll"]
