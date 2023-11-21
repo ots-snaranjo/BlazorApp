@@ -2,5 +2,6 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ActiveDebugProfile>Docker</ActiveDebugProfile>
+    <NameOfLastUsedPublishProfile>C:\Code\BlazorContainerizedApp\Properties\PublishProfiles\https___localhost_5000.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
