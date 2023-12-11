@@ -1,13 +1,24 @@
 using BlazorContainerizedApp.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
+
+builder.Services.AddHttpClient<WeatherForecastService>().ConfigurePrimaryHttpMessageHandler(() =>
+{
+    var httpClientHandler = new HttpClientHandler();
+    httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) =>
+    {
+        return true;
+    };
+    return httpClientHandler;
+});
 
 var app = builder.Build();
 
