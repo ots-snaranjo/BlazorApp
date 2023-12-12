@@ -14,7 +14,7 @@ string _personInfoURL = Environment.GetEnvironmentVariable("EWS_PERSON_INFO_URL"
 
 builder.Services.AddHttpClient<WeatherForecastService>("Client", c =>
 {
-    c.BaseAddress = _personInfoURL;
+    c.BaseAddress = new Uri(_personInfoURL);
 }).ConfigurePrimaryHttpMessageHandler(() =>
 {
     var httpClientHandler = new HttpClientHandler();
