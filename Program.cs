@@ -10,7 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
-builder.Services.AddHttpClient<WeatherForecastService>().ConfigurePrimaryHttpMessageHandler(() =>
+string _personInfoURL = Environment.GetEnvironmentVariable("EWS_PERSON_INFO_URL") ?? builder.Configuration.GetValue<string>("ServiceURL");
+
+builder.Services.AddHttpClient<WeatherForecastService>("Client", c =>
+{
+    c.BaseAddress = _personInfoURL;
+}).ConfigurePrimaryHttpMessageHandler(() =>
 {
     var httpClientHandler = new HttpClientHandler();
     httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) =>

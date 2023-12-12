@@ -17,8 +17,7 @@ namespace BlazorContainerizedApp.Data
 
         public async Task<WeatherForecast[]> GetForecastAsync(DateTime startDate)
         {
-            var _url = _configuration.GetValue<string>("ServiceURL");
-            var _message = new HttpRequestMessage(new HttpMethod("GET"), $"{_url}/WeatherForecast");
+            var _message = new HttpRequestMessage(new HttpMethod("GET"), "/WeatherForecast");
             var _resultMessage = await _apiClient.SendAsync(_message);
             if (_resultMessage.IsSuccessStatusCode)
             {
